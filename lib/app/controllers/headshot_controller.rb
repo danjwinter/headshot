@@ -34,10 +34,9 @@ class HeadshotController < ApplicationController
 
     # Post save hook.
     begin
-      @headshot_photo = HeadshotPhoto.create(headshot_params)
       method(:headshot_post_save).call(file_path)
     rescue
-
+      @headshot_photo = HeadshotPhoto.create(headshot_params)
     end
 
     headshot_url = ""
@@ -47,6 +46,11 @@ class HeadshotController < ApplicationController
       headshot_url = "#{headshot_image_url(File.basename(file_path))}"
     end
 
+    begin
+      method(:headshot_user_save).call
+    rescue
+    end
+    
     render :json => {
       :status => 'Success',
       :message => 'Headshot saved.',
