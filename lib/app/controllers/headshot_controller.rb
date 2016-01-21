@@ -34,7 +34,7 @@ class HeadshotController < ApplicationController
 
     # Post save hook.
     begin
-      method(:headshot_post_save).call(file_path)
+      method(:headshot_post_save).call(headshot_params)
     rescue
       @headshot_photo = HeadshotPhoto.create(headshot_params)
     end
@@ -58,7 +58,7 @@ class HeadshotController < ApplicationController
     }
   end
 
-private
+
 
   def headshot_params
     params.require(:headshot_photo).permit(:description,
