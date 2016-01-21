@@ -4,7 +4,6 @@ module HeadshotHelper
       :onclick => 'headshotHandlers.snap()'
     })
 
-    button_tag(label, options)
   end
 
   def headshot_config_button(label = 'Configure', options = {})

@@ -34,9 +34,10 @@ class HeadshotController < ApplicationController
 
     # Post save hook.
     begin
+      @headshot_photo = HeadshotPhoto.create(headshot_params)
       method(:headshot_post_save).call(file_path)
     rescue
-      @headshot_photo = HeadshotPhoto.create(headshot_params)
+
     end
 
     headshot_url = ""
@@ -55,11 +56,11 @@ class HeadshotController < ApplicationController
 
 private
 
-  def headshot_params 
-    params.require(:headshot_photo).permit(:description, 
-                                     :image_file_size, 
-                                     :image_file_name => File.basename(file_path), 
-                                     :image_content_type => 'image/jpeg', 
+  def headshot_params
+    params.require(:headshot_photo).permit(:description,
+                                     :image_file_size,
+                                     :image_file_name => File.basename(file_path),
+                                     :image_content_type => 'image/jpeg',
                                      :image_updated_at => Time.now)
   end
 
