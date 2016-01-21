@@ -47,10 +47,10 @@ class HeadshotController < ApplicationController
     end
 
     begin
-      method(:headshot_user_save).call
+      method(:headshot_user_save).call(headshot_params)
     rescue
     end
-    
+
     render :json => {
       :status => 'Success',
       :message => 'Headshot saved.',
